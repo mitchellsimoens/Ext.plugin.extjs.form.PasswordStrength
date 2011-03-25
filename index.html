@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>ExtJS 4 Password Strength Plugin</title>
+
+        <link rel="stylesheet" type="text/css" href="http://extjs4/resources/css/ext-all.css" />
+        <script type="text/javascript" src="http://extjs4/bootstrap.js"></script>
+
+        <script type="text/javascript" src="Ext.plugin.extjs.form.PasswordStrength.js"></script>
+
+        <script type="text/javascript">
+Ext.apply(Ext.form.VTypes, {
+    strength: function(val, field) {
+        return field.score > field.strength;
+    },
+    strengthText: "Password is not strong enough"
+});
+Ext.require([
+	"Ext.form.*"
+]);
+Ext.onReady(function() {
+	var form = Ext.create("Ext.form.FormPanel", {
+		renderTo    : Ext.getBody(),
+		width       : 300,
+		title       : "Password Strength Plugin",
+		defaultType : "textfield",
+		defaults    : {
+			anchor    : "99%",
+			msgTarget : "side"
+		},
+		items       : [
+			{
+				fieldLabel : "Username"
+			},
+			{
+				fieldLabel : "Password",
+				inputType  : "password",
+				vtype      : "strength",
+				strength   : 24,
+				plugins    : {
+					ptype : "passwordstrength"
+				}
+			}
+		]
+	});
+});
+        </script>
+    </head>
+
+    <body>
+    </body>
+</html>
